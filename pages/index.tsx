@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -13,12 +14,9 @@ import {
   id,
   auth,
 } from "instant-local-throwaway";
-import { useState } from "react";
 
 // 2. Get your app id
-const APP_ID = "33c4183f-be84-4a67-976e-d6f9503fc61e"; // Alex
-// '785e98ea-d3c8-43fb-ac68-0e222bf4e5f6' // Mark
-// '36fd6709-f5dc-441a-a9ec-03e975ffa1a4' // Joe
+const APP_ID = "69e3042b-da6a-48ef-a3c8-df1a69478c6d"; // Slava
 
 function App() {
   // 3. Init
@@ -51,8 +49,8 @@ function Login() {
     <div>
       <div className="mx-auto max-w-2xl space-y-4 px-4 sm:space-y-5">
         {!sentEmail ? (
-          <div key="em" className="flex flex-col items-center space-y-4">
-            <h2 className="text-lg font-bold">Let's log you in!</h2>
+          <div key="em" className="flex flex-col space-y-4">
+            <h2 className="">Let's log you in!</h2>
             <div>
               <input
                 placeholder="Enter your email"
@@ -63,7 +61,6 @@ function Login() {
             </div>
             <div>
               <button
-                className="block bg-blue-500 p-4 font-bold text-white"
                 onClick={() => {
                   setState({ ...state, sentEmail: email });
                   auth.sendMagicCode({ email }).catch((err) => {
@@ -76,8 +73,8 @@ function Login() {
             </div>
           </div>
         ) : (
-          <div key="cd" className="flex flex-col items-center space-y-4">
-            <h2 className="text-lg font-bold">
+          <div key="cd" className="flex flex-col space-y-4">
+            <h2>
               Okay we sent you an email! What was the code?
             </h2>
             <div>
@@ -89,7 +86,6 @@ function Login() {
               />
             </div>
             <button
-              className="block bg-blue-500 p-4 font-bold text-white"
               onClick={(e) => {
                 auth
                   .verifyMagicCode({ email: sentEmail, code })
@@ -114,7 +110,7 @@ function Main() {
   const data = useQuery({ goals: { todos: {} } });
   return (
     <div>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <pre className="text-xs">{JSON.stringify(data, null, 2)}</pre>
       <button
         onClick={(e) => {
           const todoAId = id();
